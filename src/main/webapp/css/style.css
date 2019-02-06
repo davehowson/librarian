@@ -2,7 +2,6 @@ h1, h2, h3. h4, h5, p {
     font-family: 'Roboto', sans-serif;
 }
 
-
 .title {
     margin-top: -18px;
     font-family: 'PT Serif', serif;
@@ -12,4 +11,9 @@ h1, h2, h3. h4, h5, p {
     font-family: 'Dancing Script', cursive;
     font-size: 30px;
     color: #730101;
+}
+
+#nav-title {
+    margin-top: 0;
+    font-size: 30px;
 }
