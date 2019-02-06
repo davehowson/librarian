@@ -48,7 +48,7 @@
             $(function () {
                 $(".clickable-row").click(function () {
                     var isbn = $(this).data("isbn");
-                    window.location.href = "/"+isbn;
+                    window.location.href = "book?isbn="+isbn;
                 });
 
                 $('#searchForm').submit(function (e) {
