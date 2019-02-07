@@ -81,7 +81,7 @@
                     });
 
                     data.map(function(row){
-                        bodyRows += '<tr>';
+                        bodyRows += '<tr class="clickable-row" data-isbn="' + row['isbn'] + '">';
                         cols.map(function(colName){
                             bodyRows += '<td>' + row[colName] + '</td>'
                         });
@@ -89,6 +89,11 @@
                     })
 
                     $('#searchResults > tbody').append(bodyRows);
+
+                    $(".clickable-row").click(function () {
+                        var isbn = $(this).data("isbn");
+                        window.location.href = "book?isbn="+isbn;
+                    });
                 }
             })
         </script>

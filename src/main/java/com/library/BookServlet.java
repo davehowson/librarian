@@ -1,10 +1,13 @@
 package com.library;
 
 import com.library.data.DBConnectionManager;
+import com.library.data.GoodreadsReader;
 import com.library.model.Book;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,8 +15,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
 import java.io.IOException;
-import java.math.BigInteger;
+import java.net.URL;
+import java.net.URLConnection;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -22,9 +31,6 @@ import java.sql.SQLException;
         urlPatterns = "/book"
 )
 public class BookServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String isbnStr = request.getParameter("isbn");
@@ -36,6 +42,8 @@ public class BookServlet extends HttpServlet {
 
         Connection conn;
         Book book = new Book();
+
+        Book bookGR = null;
 
         try {
             DBConnectionManager connectionManager = new DBConnectionManager(url, user, pass);
@@ -53,8 +61,21 @@ public class BookServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+        try{
+            String urlString = String.format("https://www.goodreads.com/book/isbn/%s?key=W1wy6w68dPrIpw5dyQA", isbnStr);
+            URL url1 = new URL(urlString);
+            URLConnection cn = url1.openConnection();
+
+            GoodreadsReader reader = new GoodreadsReader();
+            bookGR = reader.parseXML(cn);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/book.jsp");
         request.setAttribute("book", book);
+        request.setAttribute("bookGR", bookGR);
         dispatcher.forward(request, response);
     }
 }

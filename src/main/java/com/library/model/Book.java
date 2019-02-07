@@ -1,5 +1,6 @@
 package com.library.model;
 
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -8,15 +9,19 @@ public class Book {
     private String title;
     private String author;
     private String date;
+    private String description;
+    private String imageUrl;
 
     public Book() {
     }
 
-    public Book(long isbn, String title, String author, String date) {
+    public Book(long isbn, String title, String author, String date, String description, String imageUrl) {
         this.isbn = isbn;
         this.title = title;
         this.author = author;
-        this.date = dateConv(date);
+        this.date = date;
+        this.description = description;
+        this.imageUrl = imageUrl;
     }
 
     public long getIsbn() {
@@ -49,6 +54,22 @@ public class Book {
 
     public void setDate(String date) {
         this.date = dateConv(date);
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     private String dateConv(String date){
