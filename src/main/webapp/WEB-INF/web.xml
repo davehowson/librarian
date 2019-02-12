@@ -21,4 +21,8 @@
     <param-name>dbPass</param-name>
     <param-value>password</param-value>
   </context-param>
+  <context-param>
+    <param-name>grDevKey</param-name>
+    <param-value>W1wy6w68dPrIpw5dyQA</param-value>
+  </context-param>
 </web-app>

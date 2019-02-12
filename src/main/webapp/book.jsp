@@ -6,7 +6,7 @@
         <div class="container mt-3">
             <div class="row">
                 <div class="col-sm-12 text-center">
-                    <h4>${book.title}</h4>
+                    <h4>${bookGR.title}</h4>
                 </div>
             </div>
             <div class="row mt-4 d-flex justify-content-center">
@@ -15,10 +15,6 @@
                 </div>
                 <div class="col-sm-6">
                     <table class="table">
-                        <tr>
-                            <th>Title</th>
-                            <td>${bookGR.title}</td>
-                        </tr>
                         <tr>
                             <th>Author</th>
                             <td>${bookGR.author}</td>

@@ -62,7 +62,8 @@ public class BookServlet extends HttpServlet {
         }
 
         try{
-            String urlString = String.format("https://www.goodreads.com/book/isbn/%s?key=W1wy6w68dPrIpw5dyQA", isbnStr);
+            String key = getServletContext().getInitParameter("grDevKey");
+            String urlString = String.format("https://www.goodreads.com/book/isbn/%1$s?key=%2$s", isbnStr, key);
             URL url1 = new URL(urlString);
             URLConnection cn = url1.openConnection();
 
